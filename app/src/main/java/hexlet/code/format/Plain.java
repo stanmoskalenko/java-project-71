@@ -48,6 +48,6 @@ public class Plain {
             }
         });
 
-        return diff.toString();
+        return diff.toString().trim();
     }
 }
