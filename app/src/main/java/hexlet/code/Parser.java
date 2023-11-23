@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 public class Parser {
     private static final String JSON_EXT = ".json";
     private static final String YAML_EXT = ".yaml";
-    private static final String PATTERN = "(?i:.yaml$|.json$)";
+    private static final String YML_EXT = ".yml";
+    private static final String PATTERN = "(?i:.yaml$|.json$|.yml$)";
 
     public static Map<String, Object> parse(Path path) throws IOException {
         TypeReference<Map<String, Object>> typeReference = new TypeReference<>() {
@@ -26,7 +27,7 @@ public class Parser {
 
         return switch (type) {
             case JSON_EXT -> new JsonMapper().readValue(file, typeReference);
-            case YAML_EXT -> new YAMLMapper().readValue(file, typeReference);
+            case YAML_EXT, YML_EXT -> new YAMLMapper().readValue(file, typeReference);
             default -> throw new IllegalStateException(type);
         };
     }
