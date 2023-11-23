@@ -25,6 +25,12 @@ jobs:
           gradle-version: 8.2
           arguments: build
 
+      - name: Gradle Build
+        shell: bash
+        run: |
+          app/gradlew build
+          echo "$(find /home/.gradle/wrapper/dists/ -name gradle | xargs ls -tr | tail -n 1 | xargs dirname)" >> $GITHUB_PATH
+
       - name: Publish test coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
