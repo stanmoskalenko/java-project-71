@@ -1,0 +1,23 @@
+{
+  "follow" : {
+    "modified" : true,
+    "oldValue" : false
+  },
+  "host" : {
+    "newValue" : "hexlet.io",
+    "modified" : false
+  },
+  "proxy" : {
+    "modified" : true,
+    "oldValue" : "123.234.53.22"
+  },
+  "timeout" : {
+    "newValue" : 20,
+    "modified" : true,
+    "oldValue" : 50
+  },
+  "verbose" : {
+    "newValue" : true,
+    "modified" : true
+  }
+}
