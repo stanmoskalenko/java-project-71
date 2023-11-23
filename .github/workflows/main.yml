@@ -21,6 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           build-root-directory: app
+          gradle-version: 8.2
           arguments: build
 
       - name: Publish test coverage
