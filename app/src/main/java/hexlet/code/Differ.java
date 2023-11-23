@@ -35,6 +35,11 @@ public class Differ {
         acc.put(key, comparedValue);
     }
 
+    // method for hexlet tests
+    public static String generate(String first, String second) throws IOException {
+        return generate(first, second, Formatter.STYLISH);
+    }
+
     public static String generate(
             String first,
             String second,
