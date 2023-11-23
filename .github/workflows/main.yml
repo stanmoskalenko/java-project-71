@@ -17,16 +17,9 @@ jobs:
           distribution: corretto
           java-version: 20
 
-      - name: Gradle Build
-        shell: bash
-        run: |
-          app/gradlew build
-          echo "$(find /home/.gradle/wrapper/dists/ -name gradle | xargs ls -tr | tail -n 1 | xargs dirname)" >> $GITHUB_PATH
-
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-home-cache-cleanup: true
           build-root-directory: app
           gradle-version: 8.2
           arguments: build
