@@ -20,6 +20,7 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
+          gradle-home-cache-cleanup: true
           build-root-directory: app
           gradle-version: 8.2
           arguments: build
