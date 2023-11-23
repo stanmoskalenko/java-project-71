@@ -36,7 +36,7 @@ public final class App implements Callable<Integer> {
         var firstPath = firstArg.toAbsolutePath().normalize();
         var secondPath = secondArg.toAbsolutePath().normalize();
         try {
-            var result = Differ.generate(format.toLowerCase().trim(), firstPath, secondPath);
+            var result = Differ.generate(firstPath, secondPath, format.toLowerCase().trim());
             System.out.println(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());

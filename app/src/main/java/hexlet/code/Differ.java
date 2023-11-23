@@ -36,9 +36,9 @@ public class Differ {
     }
 
     public static String generate(
-            String format,
             Path firstPath,
-            Path secondPath
+            Path secondPath,
+            String format
     ) throws IOException {
         var firstData = Parser.parse(firstPath);
         var secondData = Parser.parse(secondPath);
