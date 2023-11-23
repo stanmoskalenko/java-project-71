@@ -36,10 +36,12 @@ public class Differ {
     }
 
     public static String generate(
-            Path firstPath,
-            Path secondPath,
+            String first,
+            String second,
             String format
     ) throws IOException {
+        var firstPath = Path.of(first).toAbsolutePath().normalize();
+        var secondPath = Path.of(second).toAbsolutePath().normalize();
         var firstData = Parser.parse(firstPath);
         var secondData = Parser.parse(secondPath);
         SortedMap<String, Map<String, Object>> acc = new TreeMap<>();

@@ -2,7 +2,6 @@ package hexlet.code;
 
 import picocli.CommandLine;
 
-import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
@@ -12,18 +11,18 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 public final class App implements Callable<Integer> {
     @CommandLine.Parameters(
-            type = Path.class,
+            // maybe convert to path
+            // type = Path.class,
             index = "0",
             paramLabel = "filepath1",
             description = "Path to first file")
-    private Path firstArg;
+    private String firstArg;
 
     @CommandLine.Parameters(
-            type = Path.class,
             index = "1",
             paramLabel = "filepath2",
             description = "Path to second file")
-    private Path secondArg;
+    private String secondArg;
 
     @CommandLine.Option(
             names = {"-f", "--format"},
@@ -33,8 +32,8 @@ public final class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        var firstPath = firstArg.toAbsolutePath().normalize();
-        var secondPath = secondArg.toAbsolutePath().normalize();
+        var firstPath = firstArg;
+        var secondPath = secondArg;
         try {
             var result = Differ.generate(firstPath, secondPath, format.toLowerCase().trim());
             System.out.println(result);
