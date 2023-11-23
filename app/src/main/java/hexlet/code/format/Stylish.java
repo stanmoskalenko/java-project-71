@@ -7,9 +7,9 @@ import java.util.SortedMap;
 
 
 public class Stylish {
-    private static final String ADDED = " + ";
-    private static final String DELETED = " - ";
-    private static final String UNMODIFIED = "   ";
+    private static final String ADDED = "  + ";
+    private static final String DELETED = "  - ";
+    private static final String UNMODIFIED = "    ";
     private static final String DELIMITER = ": ";
 
     public static String format(SortedMap<String, Map<String, Object>> comparedMap) {
