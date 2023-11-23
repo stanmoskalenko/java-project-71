@@ -20,9 +20,10 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          build-root-directory: app/
           gradle-version: 8.2
-          arguments: build
+      - run: ls -la 
+      - run: cd app
+      - run: gradle build
 
       - name: Publish test coverage
         uses: paambaati/codeclimate-action@v5.0.0
