@@ -19,6 +19,10 @@ application {
     mainClass.set("hexlet.code.App")
 }
 
+tasks.compileJava {
+    version = 20
+}
+
 dependencies {
     implementation("info.picocli:picocli:4.7.5")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
