@@ -18,7 +18,7 @@ jobs:
           java-version: 20
 
       - name: Build
-        # uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2
       - run: app/gradlew build
         # with:
         #   build-root-directory: app
