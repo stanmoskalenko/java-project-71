@@ -255,7 +255,7 @@ class AppTest {
         }
 
         @Test
-        @DisplayName("Plain style is performed correctly")
+        @DisplayName("Stylish style is performed correctly")
         void mainMultipleStylishFormatTest() {
             String[] sample = {"--format", "stylish", jsonPathArg[0], yamlPathArg[1]};
             App.main(sample);
@@ -265,7 +265,7 @@ class AppTest {
         }
 
         @Test
-        @DisplayName("Plain style is performed correctly")
+        @DisplayName("JSON style is performed correctly")
         void mainMultipleJsonFormatTest() throws Exception {
             String[] sample = {"-f", "json", jsonPathArg[0], yamlPathArg[1]};
             App.main(sample);
@@ -276,7 +276,7 @@ class AppTest {
         }
 
         @Test
-        @DisplayName("Plain style is performed correctly")
+        @DisplayName("JSON style is performed correctly for nested data")
         void mainMultipleNestedFilePlainFormatTest() throws Exception {
             String[] sample = {"-f", "json", nestedYamlPathArg[0], nestedJsonPathArg[1]};
             App.main(sample);
