@@ -1,5 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
+import com.adarshr.gradle.testlogger.theme.ThemeType
 
 plugins {
     application
@@ -37,11 +37,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     reports.enabled
-    testLogging {
-        outputs.upToDateWhen { false }
-        exceptionFormat = TestExceptionFormat.FULL
-        events = mutableSetOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
-        showStandardStreams = true
+    testLogging.exceptionFormat = TestExceptionFormat.FULL
+    testlogger {
+        setTheme(ThemeType.MOCHA)
+        showSummary = true
+        showSkipped = true
+        showFailed = true
+        showPassed = true
     }
 }
 
