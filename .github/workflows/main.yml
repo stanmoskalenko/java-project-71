@@ -1,4 +1,4 @@
-name: app-check
+name: Java CI
 
 on:
   push:
