@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@DisplayName("Difference generator Cli")
+@DisplayName("Cli difference generator tests")
 class AppTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream standardOut = System.out;
@@ -131,6 +131,26 @@ class AppTest {
 
             assertEquals(expectedNestedJson, actualJson);
         }
+
+        @Test
+        @DisplayName("Plain style of nested file is performed correctly")
+        void mainNestedYamlToPlainFormatTest() throws Exception {
+            String[] sample = {"-f", "plain", nestedYamlPathArg[0], nestedYamlPathArg[1]};
+            App.main(sample);
+            var actual = outputStreamCaptor.toString().trim();
+
+            assertEquals(expectedNestedPlain, actual);
+        }
+
+        @Test
+        @DisplayName("Plain style of file is performed correctly")
+        void mainYamlToPlainFormatTest() throws Exception {
+            String[] sample = {"-f", "plain", yamlPathArg[0], yamlPathArg[1]};
+            App.main(sample);
+            var actual = outputStreamCaptor.toString().trim();
+
+            assertEquals(expectedPlain, actual);
+        }
     }
 
     @Nested
@@ -221,5 +241,50 @@ class AppTest {
         assertTrue(actual.contains(expected));
     }
 
+    @Nested
+    @DisplayName("Generation of multiple file extension differences")
+    class MultipleFileFormatTest {
+        @Test
+        @DisplayName("Plain style is performed correctly")
+        void mainMultiplePlainFormatTest() {
+            String[] sample = {"--format", "plain", yamlPathArg[0], jsonPathArg[1]};
+            App.main(sample);
+            var actual = outputStreamCaptor.toString().trim();
+
+            assertEquals(expectedPlain, actual);
+        }
+
+        @Test
+        @DisplayName("Plain style is performed correctly")
+        void mainMultipleStylishFormatTest() {
+            String[] sample = {"--format", "stylish", jsonPathArg[0], yamlPathArg[1]};
+            App.main(sample);
+            var actual = outputStreamCaptor.toString().trim();
+
+            assertEquals(expectedStylish, actual);
+        }
+
+        @Test
+        @DisplayName("Plain style is performed correctly")
+        void mainMultipleJsonFormatTest() throws Exception {
+            String[] sample = {"-f", "json", jsonPathArg[0], yamlPathArg[1]};
+            App.main(sample);
+            var actualString = outputStreamCaptor.toString().trim();
+            var actualJson = om.readValue(actualString, Map.class);
+
+            assertEquals(expectedJson, actualJson);
+        }
+
+        @Test
+        @DisplayName("Plain style is performed correctly")
+        void mainMultipleNestedFilePlainFormatTest() throws Exception {
+            String[] sample = {"-f", "json", nestedYamlPathArg[0], nestedJsonPathArg[1]};
+            App.main(sample);
+            var actualString = outputStreamCaptor.toString().trim();
+            var actualJson = om.readValue(actualString, Map.class);
+
+            assertEquals(expectedNestedJson, actualJson);
+        }
+    }
 
 }
