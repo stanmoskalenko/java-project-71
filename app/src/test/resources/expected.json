@@ -1,23 +1,107 @@
 {
-  "follow" : {
-    "modified" : true,
-    "oldValue" : false
+  "chars1": {
+    "newValue": [
+      "a",
+      "b",
+      "c"
+    ],
+    "modified": false
   },
-  "host" : {
-    "newValue" : "hexlet.io",
-    "modified" : false
+  "chars2": {
+    "newValue": false,
+    "modified": true,
+    "oldValue": [
+      "d",
+      "e",
+      "f"
+    ]
   },
-  "proxy" : {
-    "modified" : true,
-    "oldValue" : "123.234.53.22"
+  "checked": {
+    "newValue": true,
+    "modified": true,
+    "oldValue": false
   },
-  "timeout" : {
-    "newValue" : 20,
-    "modified" : true,
-    "oldValue" : 50
+  "default": {
+    "newValue": [
+      "value1",
+      "value2"
+    ],
+    "modified": true,
+    "oldValue": "null"
   },
-  "verbose" : {
-    "newValue" : true,
-    "modified" : true
+  "id": {
+    "newValue": "null",
+    "modified": true,
+    "oldValue": 45
+  },
+  "key1": {
+    "modified": true,
+    "oldValue": "value1"
+  },
+  "key2": {
+    "newValue": "value2",
+    "modified": true
+  },
+  "numbers1": {
+    "newValue": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "modified": false
+  },
+  "numbers2": {
+    "newValue": [
+      22,
+      33,
+      44,
+      55
+    ],
+    "modified": true,
+    "oldValue": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "numbers3": {
+    "modified": true,
+    "oldValue": [
+      3,
+      4,
+      5
+    ]
+  },
+  "numbers4": {
+    "newValue": [
+      4,
+      5,
+      6
+    ],
+    "modified": true
+  },
+  "obj1": {
+    "newValue": {
+      "nestedKey": "value",
+      "isNested": true
+    },
+    "modified": true
+  },
+  "setting1": {
+    "newValue": "Another value",
+    "modified": true,
+    "oldValue": "Some value"
+  },
+  "setting2": {
+    "newValue": 300,
+    "modified": true,
+    "oldValue": 200
+  },
+  "setting3": {
+    "newValue": "none",
+    "modified": true,
+    "oldValue": true
   }
 }
