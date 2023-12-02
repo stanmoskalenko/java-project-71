@@ -1,34 +1,34 @@
 package hexlet.code.format;
 
-import hexlet.code.Differ;
+import hexlet.code.Generator;
 
+import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
 
 public class Stylish {
-    private static final String ADDED = "  + ";
-    private static final String DELETED = "  - ";
-    private static final String UNMODIFIED = "    ";
+    private static final String PLUS = "  + ";
+    private static final String MINUS = "  - ";
+    private static final String UNCHANGED = "    ";
     private static final String DELIMITER = ": ";
 
-    public static String format(SortedMap<String, Map<String, Object>> comparedMap) {
+    public static String format(List<Map<String, Object>> comparedMap) {
         var diff = new StringBuilder("{\n");
+        comparedMap.forEach(entry -> {
+            var key = entry.get(Generator.KEY);
+            var type = (String) entry.get(Generator.TYPE);
+            var newValue = entry.get(Generator.NEW_VALUE);
+            var oldValue = entry.get(Generator.OLD_VALUE);
 
-        comparedMap.forEach((key, data) -> {
-            var modified = (boolean) data.get(Differ.MODIFIED);
-            var newValue = data.get(Differ.NEW_VALUE);
-            var oldValue = data.get(Differ.OLD_VALUE);
-
-            if (modified) {
-                if (oldValue != null) {
-                    diff.append(DELETED).append(key).append(DELIMITER).append(oldValue).append("\n");
+            switch (type) {
+                case Generator.DELETED ->
+                        diff.append(MINUS).append(key).append(DELIMITER).append(oldValue).append("\n");
+                case Generator.MODIFIED -> {
+                    diff.append(MINUS).append(key).append(DELIMITER).append(oldValue).append("\n");
+                    diff.append(PLUS).append(key).append(DELIMITER).append(newValue).append("\n");
                 }
-                if (newValue != null) {
-                    diff.append(ADDED).append(key).append(DELIMITER).append(newValue).append("\n");
-                }
-            } else {
-                diff.append(UNMODIFIED).append(key).append(DELIMITER).append(newValue).append("\n");
+                case Generator.ADDED -> diff.append(PLUS).append(key).append(DELIMITER).append(newValue).append("\n");
+                default -> diff.append(UNCHANGED).append(key).append(DELIMITER).append(newValue).append("\n");
             }
         });
         diff.append("}");

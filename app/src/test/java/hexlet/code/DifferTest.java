@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @DisplayName("Difference generator tests")
@@ -19,7 +20,7 @@ class DifferTest {
     private static String expectedStylish;
     private static String expectedPlain;
     private static Map<?, ?> expectedJson;
-    private static final String RESOURCES = "src/test/resources/";
+    private static final String RESOURCES = "src/test/resources/fixtures/";
     private static final String[] JSON_PATH_ARG = {RESOURCES + "json/1.json", RESOURCES + "json/2.json"};
     private static final String[] YAML_PATH_ARG = {RESOURCES + "yaml/1.yaml", RESOURCES + "yaml/2.yaml"};
 
@@ -50,7 +51,7 @@ class DifferTest {
     void mainStylishFormatTest() throws Exception {
         var actualYamlSample = Differ.generate(YAML_PATH_ARG[0], YAML_PATH_ARG[1]);
         var actualJsonSample = Differ.generate(JSON_PATH_ARG[0], JSON_PATH_ARG[1]);
-        var actualMultipleExt = Differ.generate(JSON_PATH_ARG[0], YAML_PATH_ARG[1]);
+        var actualMultipleExt = Differ.generate(JSON_PATH_ARG[0], YAML_PATH_ARG[1], "stylish");
         var actualWithFormat = Differ.generate(JSON_PATH_ARG[0], YAML_PATH_ARG[1], "stylish");
 
         assertEquals(expectedStylish, actualYamlSample);
@@ -65,7 +66,6 @@ class DifferTest {
         var actualYamlSample = Differ.generate(YAML_PATH_ARG[0], YAML_PATH_ARG[1], "json");
         var actualJsonSample = Differ.generate(JSON_PATH_ARG[0], JSON_PATH_ARG[1], "json");
         var actualMultipleExt = Differ.generate(JSON_PATH_ARG[0], YAML_PATH_ARG[1], "json");
-
         assertEquals(expectedJson, OM.readValue(actualYamlSample, Map.class));
         assertEquals(expectedJson, OM.readValue(actualJsonSample, Map.class));
         assertEquals(expectedJson, OM.readValue(actualMultipleExt, Map.class));
@@ -81,5 +81,14 @@ class DifferTest {
         assertEquals(expectedPlain, actualYamlSample);
         assertEquals(expectedPlain, actualJsonSample);
         assertEquals(expectedPlain, actualMultipleExt);
+    }
+
+    @Test
+    @DisplayName("Unsupported style format is performed correctly")
+    void mainUnsupportedFormatTest() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Differ.generate(YAML_PATH_ARG[0], YAML_PATH_ARG[1], "test"),
+                "test format does not support!");
     }
 }

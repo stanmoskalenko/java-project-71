@@ -1,12 +1,12 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import hexlet.code.format.Json;
 import hexlet.code.format.Plain;
 import hexlet.code.format.Stylish;
 
+import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
 public final class Formatter {
     public static final String STYLISH = "stylish";
@@ -15,13 +15,13 @@ public final class Formatter {
 
     public static String format(
             String format,
-            SortedMap<String, Map<String, Object>> data
+            List<Map<String, Object>> data
     ) throws JsonProcessingException {
-        var objectMapper = new ObjectMapper();
         return switch (format) {
-            case JSON ->  objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+            case JSON -> Json.format(data);
             case PLAIN -> Plain.format(data);
-            default -> Stylish.format(data);
+            case STYLISH -> Stylish.format(data);
+            default -> throw new IllegalArgumentException(format + " format does not support!");
         };
     }
 }

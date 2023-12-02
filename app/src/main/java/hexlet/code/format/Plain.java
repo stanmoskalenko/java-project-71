@@ -1,6 +1,6 @@
 package hexlet.code.format;
 
-import hexlet.code.Differ;
+import hexlet.code.Generator;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class Plain {
         String result = "";
         if (data instanceof List<?> || data instanceof Map<?, ?>) {
             result = COMPLEX_VALUE;
-        } else if (data instanceof String && !data.equals(Differ.NULL)) {
+        } else if (data instanceof String && !data.equals(Generator.NULL)) {
             result = "'" + data + "'";
         } else if (data == null) {
             result = null;
@@ -25,28 +25,29 @@ public class Plain {
         return result;
     }
 
-    public static String format(Map<String, Map<String, Object>> comparedMap) {
+    public static String format(List<Map<String, Object>> comparedMap) {
         var diff = new StringBuilder();
-        comparedMap.forEach((key, data) -> {
-            var modified = (boolean) data.get(Differ.MODIFIED);
-            var newValue = data.get(Differ.NEW_VALUE);
-            var oldValue = data.get(Differ.OLD_VALUE);
+
+        for (Map<String, Object> entry : comparedMap) {
+            var key = entry.get(Generator.KEY);
+            var type = (String) entry.get(Generator.TYPE);
+            var oldValue = entry.get(Generator.OLD_VALUE);
+            var newValue = entry.get(Generator.NEW_VALUE);
+
             newValue = normalize(newValue);
             oldValue = normalize(oldValue);
 
-            if (modified) {
-                if (oldValue != null && newValue != null) {
-                    var msg = String.format(MODIFIED, key, oldValue.toString(), newValue.toString());
-                    diff.append(msg);
-                } else if (oldValue != null) {
-                    var msg = String.format(DELETED, key);
-                    diff.append(msg);
-                } else {
-                    var msg = String.format(ADDED, key, newValue.toString());
-                    diff.append(msg);
-                }
+            if (type.equals(Generator.MODIFIED)) {
+                var msg = String.format(MODIFIED, key, oldValue, newValue);
+                diff.append(msg);
+            } else if (type.equals(Generator.ADDED)) {
+                var msg = String.format(ADDED, key, newValue);
+                diff.append(msg);
+            } else if (type.equals(Generator.DELETED)) {
+                var msg = String.format(DELETED, key);
+                diff.append(msg);
             }
-        });
+        }
 
         return diff.toString().trim();
     }

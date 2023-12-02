@@ -1,0 +1,124 @@
+{
+  "result": [
+    {
+      "newValue": [
+        "a",
+        "b",
+        "c"
+      ],
+      "type": "unmodified",
+      "key": "chars1"
+    },
+    {
+      "newValue": false,
+      "oldValue": [
+        "d",
+        "e",
+        "f"
+      ],
+      "type": "modified",
+      "key": "chars2"
+    },
+    {
+      "newValue": true,
+      "oldValue": false,
+      "type": "modified",
+      "key": "checked"
+    },
+    {
+      "newValue": [
+        "value1",
+        "value2"
+      ],
+      "oldValue": "null",
+      "type": "modified",
+      "key": "default"
+    },
+    {
+      "newValue": "null",
+      "oldValue": 45,
+      "type": "modified",
+      "key": "id"
+    },
+    {
+      "oldValue": "value1",
+      "type": "deleted",
+      "key": "key1"
+    },
+    {
+      "newValue": "value2",
+      "type": "added",
+      "key": "key2"
+    },
+    {
+      "newValue": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "type": "unmodified",
+      "key": "numbers1"
+    },
+    {
+      "newValue": [
+        22,
+        33,
+        44,
+        55
+      ],
+      "oldValue": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "type": "modified",
+      "key": "numbers2"
+    },
+    {
+      "oldValue": [
+        3,
+        4,
+        5
+      ],
+      "type": "deleted",
+      "key": "numbers3"
+    },
+    {
+      "newValue": [
+        4,
+        5,
+        6
+      ],
+      "type": "added",
+      "key": "numbers4"
+    },
+    {
+      "newValue": {
+        "nestedKey": "value",
+        "isNested": true
+      },
+      "type": "added",
+      "key": "obj1"
+    },
+    {
+      "newValue": "Another value",
+      "oldValue": "Some value",
+      "type": "modified",
+      "key": "setting1"
+    },
+    {
+      "newValue": 300,
+      "oldValue": 200,
+      "type": "modified",
+      "key": "setting2"
+    },
+    {
+      "newValue": "none",
+      "oldValue": true,
+      "type": "modified",
+      "key": "setting3"
+    }
+  ]
+}
